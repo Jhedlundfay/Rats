@@ -203,6 +203,10 @@ def average(lst):
 def select(rats, scores):
     selected = []
     fitness = [x[2] for x in scores]
+    for i in range(len(fitness)):
+        data = rats[i].getMemory()
+        redundancy = np.sum(np.where(data > 2))
+        fitness += redundancy * 5
     results = list(zip(rats, fitness))
     while len(selected) < NUM_SELECTED:
         selected.append(min(results, key = lambda t:t[1]))
